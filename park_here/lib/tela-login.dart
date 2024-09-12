@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
+  const Login({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Log in',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -15,30 +17,30 @@ class Login extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'nome@exemplo.com',
               ),
             ),
-            TextField(
+            const TextField(
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Senha',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                // Ação de cadastro
+                Navigator.pushNamed(context, '/cadastroPerfil');
               },
-              child: Text('NÃO TEM UMA CONTA? CADASTRE-SE AQUI'),
+              child: const Text('NÃO TEM UMA CONTA? CADASTRE-SE AQUI'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Ação de login
               },
-              child: Text('LOG IN'),
+              child: const Text('LOG IN'),
             ),
           ],
         ),
