@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'tela-confirmarVaga.dart';
+
 class Vagas extends StatefulWidget {
   @override
   _VagasState createState() => _VagasState();
 }
 
 class _VagasState extends State<Vagas> {
+  int? _selectedVaga;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vagas', 
-          style: TextStyle(fontWeight: FontWeight.bold)
-          ),
+        title:
+            const Text('Vagas', style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: Container(
@@ -38,24 +41,58 @@ class _VagasState extends State<Vagas> {
                 ),
               ),
               SizedBox(height: 20),
-              ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text('Avenida Limeira, 9876 - Limeira, SP'),
+              Expanded(
+                child: ListView(
+                  children: [
+                    RadioListTile<int>(
+                      title: Text(
+                          'Vaga nº 9876\nAvenida Limeira, 9876 - Limeira, SP'),
+                      value: 9876,
+                      groupValue: _selectedVaga,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _selectedVaga = value;
+                        });
+                      },
+                    ),
+                    RadioListTile<int>(
+                      title: Text(
+                          'Vaga nº 9875\nAvenida Limeira, 9875 - Limeira, SP'),
+                      value: 9875,
+                      groupValue: _selectedVaga,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _selectedVaga = value;
+                        });
+                      },
+                    ),
+                    RadioListTile<int>(
+                      title: Text(
+                          'Vaga nº 563\nAvenida Limeira, 563 - Limeira, SP'),
+                      value: 563,
+                      groupValue: _selectedVaga,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _selectedVaga = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-              ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text('Avenida Limeira, 9875 - Limeira, SP'),
-              ),
-              ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text('Avenida Limeira, 563 - Limeira, SP'),
-              ),
-              Spacer(),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Ação do botão CONFIRMAR VAGA
-                  },
+                  onPressed: _selectedVaga != null
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ConfirmarVagaScreen(vaga: _selectedVaga!),
+                            ),
+                          );
+                        }
+                      : null,
                   child: Text('CONFIRMAR VAGA'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

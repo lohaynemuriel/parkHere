@@ -48,7 +48,7 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/tela-login');
+                Navigator.pushNamed(context, '/tela-cadastroVeiculo');
               },
               child: const Text('PRÓXIMO'),
             ),

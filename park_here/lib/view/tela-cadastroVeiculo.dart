@@ -96,7 +96,7 @@ class VehicleRegisterScreenState extends State<VehicleRegisterScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/tela-principal');
+                Navigator.pushNamed(context, '/tela-login');
               },
               child: const Text('SIGN UP'),
             ),

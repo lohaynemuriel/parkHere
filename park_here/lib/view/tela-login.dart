@@ -31,14 +31,14 @@ class Login extends StatelessWidget {
             const SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cadastroPerfil');
+                Navigator.pushNamed(context, '/tela-cadastroPerfil');
               },
               child: const Text('NÃO TEM UMA CONTA? CADASTRE-SE AQUI'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Ação de login
+                Navigator.pushNamed(context, '/tela-principal');
               },
               child: const Text('LOG IN'),
             ),
