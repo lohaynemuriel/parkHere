@@ -16,7 +16,6 @@ class VehicleRegisterScreenState extends State<VehicleRegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastre um veículo - ParkHere'),
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,7 +96,7 @@ class VehicleRegisterScreenState extends State<VehicleRegisterScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Handle vehicle registration logic
+                Navigator.pushNamed(context, '/tela-principal');
               },
               child: const Text('SIGN UP'),
             ),
