@@ -1,28 +1,34 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-
+ 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: IconButton(
+        leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: const Text('Perfil - ParkHere'),
+        title: const Text('Perfil - ParkHere', 
+          style: TextStyle(fontWeight: FontWeight.bold)
+        ),
       ),
       body: Center(
-        child: SingleChildScrollView( // Adiciona rolagem se o conteúdo for maior que a tela
+        child: SingleChildScrollView(
+          // Adiciona rolagem se o conteúdo for maior que a tela
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisSize: MainAxisSize.min, // Ajusta a altura da coluna ao conteúdo
-              mainAxisAlignment: MainAxisAlignment.center, // Centraliza verticalmente
-              crossAxisAlignment: CrossAxisAlignment.center, // Centraliza horizontalmente
+              mainAxisSize:
+                  MainAxisSize.min, // Ajusta a altura da coluna ao conteúdo
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Centraliza verticalmente
+              crossAxisAlignment:
+                  CrossAxisAlignment.center, // Centraliza horizontalmente
               children: [
                 const CircleAvatar(
                   radius: 50,
@@ -42,11 +48,13 @@ class UserProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Celular com DDD'),
+                  decoration:
+                      const InputDecoration(labelText: 'Celular com DDD'),
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Data de nascimento'),
+                  decoration:
+                      const InputDecoration(labelText: 'Data de nascimento'),
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
