@@ -18,6 +18,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HistoryScreen());
+    return MaterialApp(
+      title: 'ParkHere',
+      theme: ThemeData(
+        fontFamily: 'Comfortaa',
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            side: const BorderSide(color: Colors.black),
+            padding: const EdgeInsets.symmetric(horizontal: 137, vertical: 30),
+            textStyle: const TextStyle(color: Colors.black),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8), 
+            ),
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 137, vertical: 30),
+            textStyle: const TextStyle(color: Colors.white),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8), 
+            ),
+          ),
+        ),
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const StartScreen(),
+        '/tela-login': (context) => const Login(),
+        '/tela-cadastroPerfil': (context) => const RegisterScreen(),
+      },
+    );
   }
 }
