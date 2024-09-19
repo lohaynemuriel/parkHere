@@ -8,7 +8,8 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Histórico - ParkHere'),
+        title: const Text('Histórico - ParkHere',
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: ListView.builder(
         itemCount: transactionList.length,
@@ -39,7 +40,21 @@ final List<Transaction> transactionList = [
   Transaction(
     title: 'Pago no cartão final 1234',
     details: 'Avenida Limeira',
-    date: '23/05/2023 - Limeira, SP',
+    date: '13/09/2024 - Limeira, SP',
   ),
-  // Add more transactions here...
+  Transaction(
+    title: 'Pago no cartão final 1234',
+    details: 'Avenida Limeira',
+    date: '14/09/2024 - Limeira, SP',
+  ),
+  Transaction(
+    title: 'Pago no cartão final 1234',
+    details: 'Avenida Limeira',
+    date: '15/05/2024 - Limeira, SP',
+  ),
+  Transaction(
+    title: 'Pago no cartão final 1234',
+    details: 'Avenida Limeira',
+    date: '16/05/2024 - Limeira, SP',
+  ),
 ];
