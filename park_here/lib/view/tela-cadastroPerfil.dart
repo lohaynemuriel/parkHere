@@ -7,7 +7,6 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastro - ParkHere'),
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,7 +48,7 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cadastroVeiculo');
+                Navigator.pushNamed(context, '/tela-login');
               },
               child: const Text('PRÓXIMO'),
             ),
