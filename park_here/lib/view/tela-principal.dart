@@ -19,10 +19,11 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu'),
+        title: const Text('Menu', 
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFFA7CFFF), Color(0xFFFEF7FF)],
             begin: Alignment.topCenter,
@@ -34,31 +35,31 @@ class _MainScreenState extends State<MainScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Olá Jane!', style: TextStyle(fontSize: 24)),
-              SizedBox(height: 20),
-              Text('Última Compra', style: TextStyle(fontSize: 18)),
+              const Text('Olá Jane!', style: TextStyle(fontSize: 24)),
+              const SizedBox(height: 20),
+              const Text('Última Compra', style: TextStyle(fontSize: 18)),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 10),
-                      Text('Rua Limeira, Limeira - SP'),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
+                      const Text('Rua Limeira, Limeira - SP'),
+                      const SizedBox(height: 10),
                       Image.network(''),
-                      SizedBox(height: 10),
-                      Text('10:00 AM'),
-                      Text('11:00 PM 11 de Abril, 2024'),
-                      Text('R\$2,00'),
+                      const SizedBox(height: 10),
+                      const Text('10:00 AM'),
+                      const Text('11:00 PM 11 de Abril, 2024'),
+                      const Text('R\$2,00'),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Card(
+              const SizedBox(height: 20),
+              const Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -79,8 +80,9 @@ class _MainScreenState extends State<MainScreen> {
                   child: const Text('ESTACIONAR'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    textStyle: TextStyle(fontSize: 18),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 15),
+                    textStyle: const TextStyle(fontSize: 18),
                   ),
                 ),
               ),
