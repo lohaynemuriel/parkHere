@@ -11,7 +11,6 @@ class Login extends StatelessWidget {
           'Log in',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
