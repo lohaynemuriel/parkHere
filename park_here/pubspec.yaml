@@ -59,7 +59,15 @@ flutter:
   uses-material-design: true
   assets:
     - assets/imgperfil.jpg
-
+    - assets/parkhere-logo.png
+  fonts:
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Regular.ttf
+        - asset: assets/fonts/Comfortaa-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Comfortaa-Light.ttf
+          weight: 300
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
