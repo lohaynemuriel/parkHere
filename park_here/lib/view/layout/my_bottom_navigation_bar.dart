@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:park_here/view/tela-historico.dart';
+import 'package:park_here/view/tela-perfil.dart';
+import 'package:park_here/view/tela-principal.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   @override
@@ -12,6 +15,24 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     setState(() {
       _currentScreen = index;
     });
+    if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const UserProfileScreen()),
+      );
+    }
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()),
+      );
+    }
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HistoryScreen()),
+      );
+    }
   }
 
   @override
