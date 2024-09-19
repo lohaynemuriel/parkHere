@@ -10,7 +10,9 @@ class _VagasState extends State<Vagas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vagas'),
+        title: const Text('Vagas', 
+          style: TextStyle(fontWeight: FontWeight.bold)
+          ),
         centerTitle: true,
       ),
       body: Container(
