@@ -7,30 +7,31 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ParkHere'),
+      backgroundColor: Colors.white,
+      elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'ParkHere',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            const Image(
+              image: AssetImage('assets/parkhere-logo.png'),
+              width: 400, 
+              height: 400, 
+              fit: BoxFit.cover, 
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            OutlinedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/tela-login');
               },
               child: const Text('LOG IN'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cadastroPerfil');
+                Navigator.pushNamed(context, '/tela-cadastroPerfil');
               },
               child: const Text('CADASTRAR'),
             ),
