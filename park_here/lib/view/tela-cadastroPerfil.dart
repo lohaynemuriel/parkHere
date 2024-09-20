@@ -1,4 +1,6 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:park_here/view/widgets/confirmation_dialog.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -6,15 +8,15 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro - ParkHere'),
-      ),
+          //title: const Text('Cadastro - ParkHere'),
+          ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Cadastro',
+              'Registre-se',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -46,11 +48,18 @@ class RegisterScreen extends StatelessWidget {
               obscureText: true,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/tela-cadastroVeiculo');
-              },
-              child: const Text('PRÓXIMO'),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  ConfirmationDialog.show(
+                    context,
+                    'Cadastro realizado',
+                    'Faça o login!',
+                      '/tela-login',
+                  );
+                },
+                child: const Text('CADASTRAR'),
+              ),
             ),
           ],
         ),
