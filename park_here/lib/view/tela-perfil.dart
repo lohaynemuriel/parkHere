@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:park_here/view/widgets/confirmation_dialog.dart';
  
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
@@ -67,7 +68,12 @@ class UserProfileScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle profile update logic
+                    ConfirmationDialog.show(
+                    context,
+                    'Perfil salvo com sucesso',
+                    'Clique em "OK" para voltar ao menu',
+                      '/tela-principal',
+                    );
                   },
                   child: const Text('SALVAR'),
                 ),
