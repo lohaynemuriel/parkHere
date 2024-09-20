@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:park_here/view/widgets/confirmation_dialog.dart';
 
 class PagamentoScreen extends StatefulWidget {
   @override
@@ -134,7 +135,12 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Lógica de confirmação do pagamento
+                  ConfirmationDialog.show(
+                    context,
+                    'Pagamento realizado!',
+                    'Você será redirecionado para a tela principal.',
+                    '/tela-principal', 
+                  );
                 },
                 child: Text('CONFIRMAR'),
                 style: ElevatedButton.styleFrom(
