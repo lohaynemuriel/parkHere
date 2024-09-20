@@ -12,6 +12,7 @@ import 'view/layout/my_bottom_navigation_bar.dart';
 import 'view/tela-vagas.dart';
 import 'view/tela-perfil.dart';
 import 'view/tela-historico.dart';
+import 'view/widgets/confirmation_dialog.dart';
 
 void main() => runApp(const MyApp());
 
