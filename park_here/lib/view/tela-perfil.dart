@@ -1,6 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
- 
+
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
   @override
@@ -10,12 +10,11 @@ class UserProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/tela-principal');
           },
         ),
-        title: const Text('Perfil - ParkHere', 
-          style: TextStyle(fontWeight: FontWeight.bold)
-        ),
+        title: const Text('Perfil - ParkHere',
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: Center(
         child: SingleChildScrollView(
