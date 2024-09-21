@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/confirmation_dialog.dart';
+
 class VehicleRegisterScreen extends StatefulWidget {
   const VehicleRegisterScreen({super.key});
 
@@ -94,11 +96,18 @@ class VehicleRegisterScreenState extends State<VehicleRegisterScreen> {
               decoration: const InputDecoration(labelText: 'Escolha o modelo'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/tela-login');
-              },
-              child: const Text('SIGN UP'),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  ConfirmationDialog.show(
+                    context,
+                    'Cadastro realizado',
+                    'Faça o login!',
+                    '/tela-login',
+                  );
+                },
+                child: const Text('SIGN UP'),
+              ),
             ),
           ],
         ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:park_here/view/widgets/confirmation_dialog.dart';
 
 class PagamentoScreen extends StatefulWidget {
+  const PagamentoScreen({super.key});
+
   @override
   _PagamentoScreenState createState() => _PagamentoScreenState();
 }
@@ -23,7 +26,7 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -32,19 +35,16 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Pagamento',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {
-                // Lógica para adicionar método de pagamento
-              },
-              child: Text(
+              child: const Text(
                 'Adicionar método de pagamento',
                 style: TextStyle(
                   fontSize: 16,
@@ -53,23 +53,23 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Image.asset(
-                  'assets/visa_logo.png', // Substitua pela imagem correta do logo
+                  'assets/logotipo-visa.png', // Substitua pela imagem correta do logo
                   height: 50,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Image.asset(
-                  'assets/mastercard_logo.png', // Substitua pela imagem correta do logo
+                  'assets/logotipo-mastercard.png', // Substitua pela imagem correta do logo
                   height: 50,
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             DropdownButtonFormField<String>(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Modo de pagamento',
               ),
@@ -85,24 +85,24 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                   _selectedPaymentMethod = newValue;
                 });
               },
-              hint: Text('Selecione'),
+              hint: const Text('Selecione'),
             ),
-            SizedBox(height: 20),
-            TextField(
+            const SizedBox(height: 20),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'Nome do Titular',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
-            TextField(
+            const SizedBox(height: 20),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'Número do Cartão',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
-            Row(
+            const SizedBox(height: 20),
+            const Row(
               children: [
                 Expanded(
                   child: TextField(
@@ -123,25 +123,30 @@ class _PagamentoScreenState extends State<PagamentoScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            TextField(
+            const SizedBox(height: 20),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'CEP',
                 border: OutlineInputBorder(),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Lógica de confirmação do pagamento
+                  ConfirmationDialog.show(
+                    context,
+                    'Pagamento confirmado',
+                    'Seu pagamento foi concluído com sucesso!',
+                    '/tela-principal',
+                  );
                 },
-                child: Text('CONFIRMAR'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  minimumSize: Size(343, 52),
-                  textStyle: TextStyle(fontSize: 18),
+                  minimumSize: const Size(343, 52),
+                  textStyle: const TextStyle(fontSize: 18),
                 ),
+                child: Text('CONFIRMAR'),
               ),
             ),
           ],

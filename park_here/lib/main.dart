@@ -12,6 +12,7 @@ import 'view/tela-vagas.dart';
 import 'view/tela-perfil.dart';
 import 'view/tela-historico.dart';
 import 'view/layout/my_bottom_navigation_bar.dart';
+import 'view/widgets/confirmation_dialog.dart';
 
 void main() => runApp(const MyApp());
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
         '/tela-login': (context) => const Login(),
         '/tela-cadastroPerfil': (context) => const RegisterScreen(),
         '/tela-cadastroVeiculo': (context) => const VehicleRegisterScreen(),
-        '/tela-principal': (context) => MainScreen(),
+        '/tela-principal': (context) => const MainScreen(),
         '/tela-perfil': (context) => const UserProfileScreen(),
         '/tela-historico': (context) => const HistoryScreen(),
         '/tela-vagas': (context) => Vagas(),

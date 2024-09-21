@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'tela-confirmarVaga.dart';
 
 class Vagas extends StatefulWidget {
+  const Vagas({super.key});
+
   @override
   _VagasState createState() => _VagasState();
 }
@@ -14,39 +15,51 @@ class _VagasState extends State<Vagas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text('Vagas', style: TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFA7CFFF), Color(0xFFFEF7FF)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
+          'Vagas',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextField(
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: Colors.grey.shade400),
+              ),
+              child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Insira o endereço ou código da vaga',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  border: InputBorder.none,
                 ),
               ),
-              SizedBox(height: 20),
-              Expanded(
-                child: ListView(
-                  children: [
-                    RadioListTile<int>(
-                      title: Text(
-                          'Vaga nº 9876\nAvenida Limeira, 9876 - Limeira, SP'),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    leading: Image.asset(
+                      'assets/vagas.png',
+                      width: 40,
+                      height: 40,
+                    ),
+                    title: const Text(
+                      'Vaga nº 9876\nAvenida Limeira, 563 - Limeira, SP',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    trailing: Radio<int>(
                       value: 9876,
                       groupValue: _selectedVaga,
                       onChanged: (int? value) {
@@ -55,9 +68,18 @@ class _VagasState extends State<Vagas> {
                         });
                       },
                     ),
-                    RadioListTile<int>(
-                      title: Text(
-                          'Vaga nº 9875\nAvenida Limeira, 9875 - Limeira, SP'),
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      'assets/vagas.png',
+                      width: 40,
+                      height: 40,
+                    ),
+                    title: const Text(
+                      'Vaga nº 9875\nAvenida Limeira, 563 - Limeira, SP',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    trailing: Radio<int>(
                       value: 9875,
                       groupValue: _selectedVaga,
                       onChanged: (int? value) {
@@ -66,10 +88,19 @@ class _VagasState extends State<Vagas> {
                         });
                       },
                     ),
-                    RadioListTile<int>(
-                      title: Text(
-                          'Vaga nº 563\nAvenida Limeira, 563 - Limeira, SP'),
-                      value: 563,
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      'assets/vagas.png',
+                      width: 40,
+                      height: 40,
+                    ),
+                    title: const Text(
+                      'Vaga nº 9874\nAvenida Limeira, 563 - Limeira, SP',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    trailing: Radio<int>(
+                      value: 9874,
                       groupValue: _selectedVaga,
                       onChanged: (int? value) {
                         setState(() {
@@ -77,32 +108,32 @@ class _VagasState extends State<Vagas> {
                         });
                       },
                     ),
-                  ],
-                ),
-              ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: _selectedVaga != null
-                      ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ConfirmarVagaScreen(vaga: _selectedVaga!),
-                            ),
-                          );
-                        }
-                      : null,
-                  child: Text('CONFIRMAR VAGA'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    minimumSize: Size(343, 52),
-                    textStyle: TextStyle(fontSize: 18),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: _selectedVaga != null
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ConfirmarVagaScreen(vaga: _selectedVaga!),
+                          ),
+                        );
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  minimumSize: const Size(343, 52),
+                  textStyle: const TextStyle(fontSize: 12),
+                ),
+                child: const Text('CONFIRMAR VAGA'),
+              ),
+            ),
+          ],
         ),
       ),
     );

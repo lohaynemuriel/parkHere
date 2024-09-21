@@ -7,8 +7,8 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       backgroundColor: Colors.white,
       body: Center(
@@ -17,9 +17,9 @@ class StartScreen extends StatelessWidget {
           children: [
             const Image(
               image: AssetImage('assets/parkhere-logo.png'),
-              width: 400, 
-              height: 400, 
-              fit: BoxFit.cover, 
+              width: 400,
+              height: 400,
+              fit: BoxFit.cover,
             ),
             const SizedBox(height: 20),
             OutlinedButton(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ConfirmarVagaScreen extends StatelessWidget {
   final int vaga;
 
-  ConfirmarVagaScreen({required this.vaga});
+  const ConfirmarVagaScreen({super.key, required this.vaga});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class ConfirmarVagaScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Estacione',
           style: TextStyle(
             color: Colors.black,
@@ -20,50 +20,53 @@ class ConfirmarVagaScreen extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        color: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Image.asset(
-                'assets/car_icon.png', // Substitua pelo ícone que você está usando
-                height: 100,
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  'assets/carro-esporte.png', // Substitua pelo ícone do carro
+                  height: 100,
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            Center(
+            const SizedBox(height: 20),
+            const Center(
               child: Text(
                 'ABC 34B3',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 28, // Font size similar to the image
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Center(
+            const SizedBox(height: 20),
+            const Center(
               child: Text(
                 'Confirme as informações abaixo',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18, // Font size similar to the image
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Expanded(
                     child: Text(
@@ -75,13 +78,14 @@ class ConfirmarVagaScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Tempo de permanência',
               style: TextStyle(fontSize: 16),
             ),
+            const SizedBox(height: 10),
             DropdownButtonFormField<String>(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
               items:
@@ -92,20 +96,20 @@ class ConfirmarVagaScreen extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (_) {},
-              hint: Text('Selecione'),
+              hint: const Text('Selecione'),
             ),
-            Spacer(),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/tela-pagamento');
                 },
-                child: Text('IR PARA PAGAMENTO'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  minimumSize: Size(343, 52),
-                  textStyle: TextStyle(fontSize: 18),
+                  minimumSize: const Size(343, 52),
+                  textStyle: const TextStyle(fontSize: 18),
                 ),
+                child: const Text('IR PARA PAGAMENTO'),
               ),
             ),
           ],
