@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:park_here/firebase_options.dart';
 import 'view/tela-confirmarVaga.dart';
 import 'view/tela-login.dart';
 import 'view/tela-inicio.dart';
@@ -14,7 +16,11 @@ import 'view/tela-historico.dart';
 import 'view/layout/my_bottom_navigation_bar.dart';
 import 'view/widgets/confirmation_dialog.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -49,8 +55,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const StartScreen(),
-        '/tela-login': (context) => const Login(),
-        '/tela-cadastroPerfil': (context) => const RegisterScreen(),
+        '/tela-login': (context) => Login(),
+        '/tela-cadastroPerfil': (context) => RegisterScreen(),
         '/tela-cadastroVeiculo': (context) => const VehicleRegisterScreen(),
         '/tela-principal': (context) => const MainScreen(),
         '/tela-perfil': (context) => const UserProfileScreen(),
