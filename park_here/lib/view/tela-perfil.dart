@@ -9,12 +9,7 @@ class UserProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushNamed(context, '/tela-principal');
-          },
-        ),
+        automaticallyImplyLeading: false,
         title: const Text('Perfil - ParkHere',
             style: TextStyle(fontWeight: FontWeight.bold)),
       ),
