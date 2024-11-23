@@ -1,27 +1,30 @@
-// ignore_for_file: unused_import
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:park_here/firebase_options.dart';
-import 'bloc/auth_bloc.dart';
-import 'view/tela-confirmarVaga.dart';
-import 'view/tela-login.dart';
-import 'view/tela-inicio.dart';
-import 'view/tela-cadastroPerfil.dart';
-import 'view/tela-cadastroVeiculo.dart';
-import 'view/tela-pagamento.dart';
-import 'view/tela-principal.dart';
-import 'view/tela-vagas.dart';
-import 'view/tela-perfil.dart';
-import 'view/tela-historico.dart';
-import 'view/layout/my_bottom_navigation_bar.dart';
-import 'view/widgets/confirmation_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:park_here/firebase_options.dart';
+import 'package:park_here/view/tela-cadastroPerfil.dart';
+import 'package:park_here/view/tela-cadastroVeiculo.dart';
+import 'package:park_here/view/tela-confirmarVaga.dart';
+import 'package:park_here/view/tela-historico.dart';
+import 'package:park_here/view/tela-pagamento.dart';
+import 'package:park_here/view/tela-perfil.dart';
+import 'package:park_here/view/tela-principal.dart';
+import 'package:park_here/view/tela-vagas.dart';
+import 'bloc/auth_bloc.dart';
+import 'view/tela-inicio.dart';
+import 'view/tela-login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint("Erro ao inicializar Firebase: $e");
+  }
   runApp(MyApp());
 }
 
@@ -29,7 +32,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(FirebaseAuth.instance),
+      create: (_) =>
+          AuthBloc(FirebaseAuth.instance, FirebaseFirestore.instance),
       child: MaterialApp(
         title: 'ParkHere',
         theme: ThemeData(
@@ -64,10 +68,10 @@ class MyApp extends StatelessWidget {
           '/tela-cadastroPerfil': (context) => RegisterScreen(),
           '/tela-cadastroVeiculo': (context) => const VehicleRegisterScreen(),
           '/tela-principal': (context) => const MainScreen(),
-          '/tela-perfil': (context) => const UserProfileScreen(),
+          '/tela-perfil': (context) => UserProfileScreen(),
           '/tela-historico': (context) => const HistoryScreen(),
-          '/tela-vagas': (context) => Vagas(),
-          '/tela-confirmarVaga': (context) => ConfirmarVagaScreen(
+          '/tela-vagas': (context) => const Vagas(),
+          '/tela-confirmarVaga': (context) => const ConfirmarVagaScreen(
                 vaga: 0,
               ),
           '/tela-pagamento': (context) => PagamentoScreen(),

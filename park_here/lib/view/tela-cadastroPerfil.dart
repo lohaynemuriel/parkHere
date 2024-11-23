@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:park_here/bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -13,6 +15,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _dataNascimentoController = TextEditingController();
+  final _cnhController = TextEditingController();
+  final _telefoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,6 +27,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _dataNascimentoController.dispose();
+    _cnhController.dispose();
+    _telefoneController.dispose();
     super.dispose();
   }
 
@@ -103,6 +111,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
+                TextFormField(
+                  controller: _dataNascimentoController,
+                  decoration:
+                      const InputDecoration(labelText: 'Data de Nascimento'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira sua data de nascimento';
+                    }
+                    // Validação adicional pode ser feita aqui (formato, maior de idade, etc.)
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _cnhController,
+                  decoration: const InputDecoration(labelText: 'CNH'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira sua CNH';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _telefoneController,
+                  decoration: const InputDecoration(labelText: 'Telefone'),
+                  keyboardType: TextInputType.phone,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira seu telefone';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _passwordController,
@@ -138,6 +181,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         SignUpRequested(
                           _emailController.text,
                           _passwordController.text,
+                          _nomeController.text,
+                          _cpfController.text,
+                          _dataNascimentoController.text,
+                          _cnhController.text,
+                          _telefoneController.text,
                         ),
                       );
                     }
