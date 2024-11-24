@@ -18,7 +18,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     if (index == 2) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const UserProfileScreen()),
+        MaterialPageRoute(builder: (context) => UserProfileScreen()),
       );
     }
     if (index == 1) {
