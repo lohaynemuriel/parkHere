@@ -19,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       SignUpRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
+      // Criar usuário no Firebase Auth
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: event.email,
         password: event.password,
@@ -27,9 +28,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // Salvar dados adicionais no Firestore
       await _firestore.collection('pessoas').doc(userCredential.user?.uid).set({
         'nome': event.nome,
-        'telefone': '',
+        'telefone': event.telefone,
         'email': event.email,
-        'dataNascimento': '',
+        'dataNascimento': event.dataNascimento,
         'cnh': event.cnh,
         'cpf': event.cpf,
       });

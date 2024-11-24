@@ -12,7 +12,9 @@ import 'package:park_here/view/tela-pagamento.dart';
 import 'package:park_here/view/tela-perfil.dart';
 import 'package:park_here/view/tela-principal.dart';
 import 'package:park_here/view/tela-vagas.dart';
-import 'bloc/auth_bloc.dart';
+import 'package:park_here/bloc/auth_bloc.dart';
+import 'package:provider/provider.dart';
+import 'provider/veiculo_provider.dart';
 import 'view/tela-inicio.dart';
 import 'view/tela-login.dart';
 
@@ -25,15 +27,24 @@ void main() async {
   } catch (e) {
     debugPrint("Erro ao inicializar Firebase: $e");
   }
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) =>
-          AuthBloc(FirebaseAuth.instance, FirebaseFirestore.instance),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) =>
+              VeiculoProvider()..loadVeiculo(), // Carregar o veículo ao iniciar
+        ),
+        BlocProvider(
+          create: (_) =>
+              AuthBloc(FirebaseAuth.instance, FirebaseFirestore.instance),
+        ),
+      ],
       child: MaterialApp(
         title: 'ParkHere',
         theme: ThemeData(
@@ -66,8 +77,8 @@ class MyApp extends StatelessWidget {
           '/': (context) => const StartScreen(),
           '/tela-login': (context) => Login(),
           '/tela-cadastroPerfil': (context) => RegisterScreen(),
-          '/tela-cadastroVeiculo': (context) => const VehicleRegisterScreen(),
-          '/tela-principal': (context) => const MainScreen(),
+          '/tela-cadastroVeiculo': (context) => VehicleRegisterScreen(),
+          '/tela-principal': (context) => MainScreen(),
           '/tela-perfil': (context) => UserProfileScreen(),
           '/tela-historico': (context) => const HistoryScreen(),
           '/tela-vagas': (context) => const Vagas(),

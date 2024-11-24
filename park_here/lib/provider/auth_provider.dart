@@ -1,57 +1,57 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-import '../view/tela-principal.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthProvider {
-  Future<bool> signup(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
+  final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore firestore;
+
+  AuthProvider({required this.firebaseAuth, required this.firestore});
+
+  Future<User?> signup({
+    required String email,
+    required String password,
+    required Map<String, dynamic> userData,
+  }) async {
     try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      await Future.delayed(Duration(seconds: 1));
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
-      return true;
-    } on FirebaseAuthException catch (e) {
-      String message = '';
-      if (e.code == 'weak-password') {
-        message = 'A senha é muito fraca';
-      } else if (e.code == 'email-already-in-use') {
-        message = 'Esse e-mail já esta sendo utilizado';
-      }
-      return false;
+      // Criar usuário no Firebase Auth
+      final userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Salvar dados no Firestore
+      await firestore
+          .collection('pessoas')
+          .doc(userCredential.user?.uid)
+          .set(userData);
+
+      return userCredential.user;
     } catch (e) {
-      print(e);
-      return false;
+      rethrow;
     }
   }
 
-  Future<bool> signin(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
+  Future<User?> signin({
+    required String email,
+    required String password,
+  }) async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      await Future.delayed(Duration(seconds: 1));
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
-      return true;
-    } on FirebaseAuthException catch (e) {
-      String message = '';
-      if (e.code == 'weak-password') {
-        message = 'Senha incorreta';
-      } else if (e.code == 'email-already-in-use') {
-        message = 'E-mail inválido';
-      }
-      return false;
+      // Login no Firebase Auth
+      final userCredential = await firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential.user;
     } catch (e) {
-      print(e);
-      return false;
+      rethrow;
     }
+  }
+
+  Future<void> signout() async {
+    await firebaseAuth.signOut();
+  }
+
+  User? getCurrentUser() {
+    return firebaseAuth.currentUser;
   }
 }
