@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:park_here/firebase_options.dart';
+import 'package:park_here/provider/vaga_provider.dart';
+import 'package:park_here/provider/pagamento_provider.dart'; // Novo Provider
 import 'package:park_here/view/tela-cadastroPerfil.dart';
 import 'package:park_here/view/tela-cadastroVeiculo.dart';
 import 'package:park_here/view/tela-confirmarVaga.dart';
@@ -11,8 +13,8 @@ import 'package:park_here/view/tela-historico.dart';
 import 'package:park_here/view/tela-pagamento.dart';
 import 'package:park_here/view/tela-perfil.dart';
 import 'package:park_here/view/tela-principal.dart';
-import 'package:park_here/view/tela-vagas.dart';
 import 'package:park_here/bloc/auth_bloc.dart';
+import 'package:park_here/view/tela-vagas.dart';
 import 'package:provider/provider.dart';
 import 'provider/veiculo_provider.dart';
 import 'view/tela-inicio.dart';
@@ -20,6 +22,7 @@ import 'view/tela-login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -37,8 +40,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) =>
-              VeiculoProvider()..loadVeiculo(), // Carregar o veículo ao iniciar
+          create: (_) => VeiculoProvider()..loadVeiculo(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => VagasProvider()..loadVagas(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PagamentoProvider(), // Novo provider de pagamento
         ),
         BlocProvider(
           create: (_) =>
@@ -82,10 +90,26 @@ class MyApp extends StatelessWidget {
           '/tela-perfil': (context) => UserProfileScreen(),
           '/tela-historico': (context) => const HistoryScreen(),
           '/tela-vagas': (context) => const Vagas(),
-          '/tela-confirmarVaga': (context) => const ConfirmarVagaScreen(
-                vaga: 0,
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == '/tela-confirmarVaga') {
+            final args = settings.arguments as Map<String, dynamic>;
+            final vaga = args['vaga'];
+            return MaterialPageRoute(
+              builder: (context) => ConfirmarVagaScreen(vaga: vaga),
+            );
+          } else if (settings.name == '/tela-pagamento') {
+            final args = settings.arguments as Map<String, dynamic>;
+            return MaterialPageRoute(
+              builder: (context) => PagamentoScreen(
+                vagaId: args[
+                    'vagaId'], // Certifique-se de que esses valores existem.
+                tempoPermanencia: args['tempoPermanencia'],
+                placaVeiculo: args['placaVeiculo'],
               ),
-          '/tela-pagamento': (context) => PagamentoScreen(),
+            );
+          }
+          return null; // Retorna nulo se a rota não for encontrada
         },
       ),
     );

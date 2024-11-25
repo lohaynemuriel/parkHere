@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:park_here/provider/vaga_provider.dart';
+import 'package:provider/provider.dart';
 import 'tela-confirmarVaga.dart';
 
 class Vagas extends StatefulWidget {
@@ -9,10 +11,13 @@ class Vagas extends StatefulWidget {
 }
 
 class _VagasState extends State<Vagas> {
-  int? _selectedVaga;
+  int? _selectedVagaCodigo;
 
   @override
   Widget build(BuildContext context) {
+    final vagasProvider = Provider.of<VagasProvider>(context);
+    final vagas = vagasProvider.vagasDisponiveis;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -29,112 +34,66 @@ class _VagasState extends State<Vagas> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: Colors.grey.shade400),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Insira o endereço ou código da vaga',
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView(
+        child: vagas.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    leading: Image.asset(
-                      'assets/vagas.png',
-                      width: 40,
-                      height: 40,
-                    ),
-                    title: const Text(
-                      'Vaga nº 9876\nAvenida Limeira, 563 - Limeira, SP',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    trailing: Radio<int>(
-                      value: 9876,
-                      groupValue: _selectedVaga,
-                      onChanged: (int? value) {
-                        setState(() {
-                          _selectedVaga = value;
-                        });
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: vagas.length,
+                      itemBuilder: (context, index) {
+                        final vaga = vagas[index];
+                        return ListTile(
+                          leading: Image.asset(
+                            'assets/vagas.png',
+                            width: 40,
+                            height: 40,
+                          ),
+                          title: Text(
+                            'Vaga nº ${vaga.codigoVaga}\n${vaga.endereco}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          trailing: Radio<int>(
+                            value: vaga.codigoVaga,
+                            groupValue: _selectedVagaCodigo,
+                            onChanged: (int? value) {
+                              setState(() {
+                                _selectedVagaCodigo = value;
+                              });
+                            },
+                          ),
+                        );
                       },
                     ),
                   ),
-                  ListTile(
-                    leading: Image.asset(
-                      'assets/vagas.png',
-                      width: 40,
-                      height: 40,
-                    ),
-                    title: const Text(
-                      'Vaga nº 9875\nAvenida Limeira, 563 - Limeira, SP',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    trailing: Radio<int>(
-                      value: 9875,
-                      groupValue: _selectedVaga,
-                      onChanged: (int? value) {
-                        setState(() {
-                          _selectedVaga = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      'assets/vagas.png',
-                      width: 40,
-                      height: 40,
-                    ),
-                    title: const Text(
-                      'Vaga nº 9874\nAvenida Limeira, 563 - Limeira, SP',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    trailing: Radio<int>(
-                      value: 9874,
-                      groupValue: _selectedVaga,
-                      onChanged: (int? value) {
-                        setState(() {
-                          _selectedVaga = value;
-                        });
-                      },
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: _selectedVagaCodigo != null
+                          ? () {
+                              final vagaSelecionada = vagas.firstWhere(
+                                (vaga) =>
+                                    vaga.codigoVaga == _selectedVagaCodigo,
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ConfirmarVagaScreen(
+                                      vaga: vagaSelecionada),
+                                ),
+                              );
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        minimumSize: const Size(343, 52),
+                        textStyle: const TextStyle(fontSize: 12),
+                      ),
+                      child: const Text('CONFIRMAR VAGA'),
                     ),
                   ),
                 ],
               ),
-            ),
-            Center(
-              child: ElevatedButton(
-                onPressed: _selectedVaga != null
-                    ? () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ConfirmarVagaScreen(vaga: _selectedVaga!),
-                          ),
-                        );
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: const Size(343, 52),
-                  textStyle: const TextStyle(fontSize: 12),
-                ),
-                child: const Text('CONFIRMAR VAGA'),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
